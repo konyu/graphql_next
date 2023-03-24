@@ -4,7 +4,6 @@ import styles from "@/styles/Home.module.css";
 import { useQuery } from "@apollo/client";
 import { graphql } from "../gql";
 import { Post, Comment } from "../gql/graphql";
-// import Film from "../components/File";
 
 const allPostsQueryDocument = graphql(/* GraphQL */ `
   query allPosts {

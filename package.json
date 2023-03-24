@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write --ignore-path .gitignore --ignore-unknown './**/*'",
-    "codegen": "npx graphql-codegen",
+    "codegen": "scripts/codegen.sh",
     "codegen-watch": "npx graphql-codegen --watch"
   },
   "dependencies": {
