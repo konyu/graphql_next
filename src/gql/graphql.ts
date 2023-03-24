@@ -13,7 +13,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   /** An ISO 8601-encoded datetime */
-  ISO8601DateTime: any;
+  ISO8601DateTime: string;
 };
 
 export type Comment = {

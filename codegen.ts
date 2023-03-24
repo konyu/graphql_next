@@ -7,6 +7,21 @@ const config: CodegenConfig = {
   generates: {
     "./src/gql/": {
       preset: "client",
+      config: {
+        scalars: { ISO8601DateTime: "string", ISO8601Date: "string" },
+      },
+    },
+    "./src/gql/mocks.ts": {
+      plugins: [
+        {
+          "typescript-mock-data": {
+            scalars: {
+              ISO8601DateTime: "moment",
+              ISO8601Date: "date",
+            },
+          },
+        },
+      ],
     },
   },
 };
