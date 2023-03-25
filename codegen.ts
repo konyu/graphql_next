@@ -11,7 +11,7 @@ const config: CodegenConfig = {
         scalars: { ISO8601DateTime: "string", ISO8601Date: "string" },
       },
     },
-    "./src/gql/mocks.ts": {
+    "./__test__/mocks.ts": {
       plugins: [
         {
           "typescript-mock-data": {
