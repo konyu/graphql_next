@@ -6,7 +6,7 @@ gh api $SCHEMA_FILE -H "Accept: application/vnd.github.raw" > schema.graphql_new
 if [ ! -e schema.graphql ]; then
   mv schema.graphql_new schema.graphql
   npx graphql-codegen
-  return 0
+  exit 0
 fi
 
 # schema.graphqlが存在する場合、新旧のファイルに差分があるかチェック
