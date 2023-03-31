@@ -2,19 +2,15 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 
 import { useQuery } from "@apollo/client";
-import { graphql } from "../gql";
-import { Post, Comment } from "../gql/graphql";
+import { graphql } from "@/gql";
+import { Post as PostType } from "@/gql/graphql"; // コンポーネントと名前がかぶるのでPostTypeにエイリアス
+import { Post } from "@/components/Post";
 
 const allPostsQueryDocument = graphql(/* GraphQL */ `
   query allPosts {
     posts {
       id
-      name
-      comments {
-        id
-        postId
-        name
-      }
+      ...PostFragment
     }
   }
 `);
@@ -34,13 +30,9 @@ export default function Home() {
         <div className="App">
           {data && (
             <ul>
-              {data.posts.map((post: Post, i: number) => (
+              {data.posts.map((post: PostType, i: number) => (
                 <li key={`${i}`}>
-                  <div>{post.name}</div>
-                  {post.comments?.map((comment: Comment, j: number) => (
-                    <div key={`${j}`}>{comment.name}</div>
-                  ))}
-                  <div></div>
+                  <Post name={post.name} comments={post.comments} />
                 </li>
               ))}
             </ul>
