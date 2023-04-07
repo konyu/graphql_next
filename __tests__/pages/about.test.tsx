@@ -10,9 +10,6 @@ describe("About", () => {
       name: /About me/i,
     });
 
-    // 必ず落ちるテストサンプル
-    expect(true).toBe(false);
-
     expect(heading).toBeInTheDocument();
   });
 });
