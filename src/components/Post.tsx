@@ -1,20 +1,24 @@
 import { FC } from "react";
-import { Post as PostType, Comment as CommentType } from "@/gql/graphql";
+import { CommentFragment } from "@/gql/graphql";
 import { Comment } from "@/components/Comment";
 
 import { gql } from "@apollo/client";
 
 gql`
-  fragment PostFragment on Post {
+  fragment Post on Post {
     name
     comments {
-      id
-      ...CommentFragment
+      ...Comment
     }
   }
 `;
 
-export const Post: FC<PostType> = ({ name, comments }) => {
+type Props = {
+  name: string;
+  comments: CommentFragment[];
+};
+
+export const Post: FC<Props> = ({ name, comments }) => {
   return (
     <>
       <div>
@@ -22,7 +26,7 @@ export const Post: FC<PostType> = ({ name, comments }) => {
       </div>
       {comments && (
         <ul>
-          {comments.map((comment: CommentType, i: number) => (
+          {comments.map((comment: CommentFragment, i: number) => (
             <li key={`${i}`}>
               <Comment name={comment.name} postId={comment.postId} />
             </li>
