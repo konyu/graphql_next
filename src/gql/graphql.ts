@@ -90,39 +90,39 @@ export type Query = {
   posts: Array<Post>;
 };
 
-export type CommentFragmentFragment = {
+export type CommentFragment = {
   __typename?: "Comment";
   name: string;
   postId: number;
-} & { " $fragmentName"?: "CommentFragmentFragment" };
+} & { " $fragmentName"?: "CommentFragment" };
 
-export type PostFragmentFragment = {
+export type PostFragment = {
   __typename?: "Post";
   name: string;
   comments?: Array<
-    { __typename?: "Comment"; id?: string | null } & {
-      " $fragmentRefs"?: { CommentFragmentFragment: CommentFragmentFragment };
+    { __typename?: "Comment" } & {
+      " $fragmentRefs"?: { CommentFragment: CommentFragment };
     }
   > | null;
-} & { " $fragmentName"?: "PostFragmentFragment" };
+} & { " $fragmentName"?: "PostFragment" };
 
 export type AllPostsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type AllPostsQuery = {
   __typename?: "Query";
   posts: Array<
-    { __typename?: "Post"; id?: string | null } & {
-      " $fragmentRefs"?: { PostFragmentFragment: PostFragmentFragment };
+    { __typename?: "Post"; name: string } & {
+      " $fragmentRefs"?: { PostFragment: PostFragment };
     }
   >;
 };
 
-export const CommentFragmentFragmentDoc = {
+export const CommentFragmentDoc = {
   kind: "Document",
   definitions: [
     {
       kind: "FragmentDefinition",
-      name: { kind: "Name", value: "CommentFragment" },
+      name: { kind: "Name", value: "Comment" },
       typeCondition: {
         kind: "NamedType",
         name: { kind: "Name", value: "Comment" },
@@ -136,13 +136,13 @@ export const CommentFragmentFragmentDoc = {
       },
     },
   ],
-} as unknown as DocumentNode<CommentFragmentFragment, unknown>;
-export const PostFragmentFragmentDoc = {
+} as unknown as DocumentNode<CommentFragment, unknown>;
+export const PostFragmentDoc = {
   kind: "Document",
   definitions: [
     {
       kind: "FragmentDefinition",
-      name: { kind: "Name", value: "PostFragment" },
+      name: { kind: "Name", value: "Post" },
       typeCondition: {
         kind: "NamedType",
         name: { kind: "Name", value: "Post" },
@@ -157,10 +157,9 @@ export const PostFragmentFragmentDoc = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
                 {
                   kind: "FragmentSpread",
-                  name: { kind: "Name", value: "CommentFragment" },
+                  name: { kind: "Name", value: "Comment" },
                 },
               ],
             },
@@ -170,7 +169,7 @@ export const PostFragmentFragmentDoc = {
     },
     {
       kind: "FragmentDefinition",
-      name: { kind: "Name", value: "CommentFragment" },
+      name: { kind: "Name", value: "Comment" },
       typeCondition: {
         kind: "NamedType",
         name: { kind: "Name", value: "Comment" },
@@ -184,7 +183,7 @@ export const PostFragmentFragmentDoc = {
       },
     },
   ],
-} as unknown as DocumentNode<PostFragmentFragment, unknown>;
+} as unknown as DocumentNode<PostFragment, unknown>;
 export const AllPostsDocument = {
   kind: "Document",
   definitions: [
@@ -201,10 +200,10 @@ export const AllPostsDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
+                { kind: "Field", name: { kind: "Name", value: "name" } },
                 {
                   kind: "FragmentSpread",
-                  name: { kind: "Name", value: "PostFragment" },
+                  name: { kind: "Name", value: "Post" },
                 },
               ],
             },
@@ -214,7 +213,7 @@ export const AllPostsDocument = {
     },
     {
       kind: "FragmentDefinition",
-      name: { kind: "Name", value: "CommentFragment" },
+      name: { kind: "Name", value: "Comment" },
       typeCondition: {
         kind: "NamedType",
         name: { kind: "Name", value: "Comment" },
@@ -229,7 +228,7 @@ export const AllPostsDocument = {
     },
     {
       kind: "FragmentDefinition",
-      name: { kind: "Name", value: "PostFragment" },
+      name: { kind: "Name", value: "Post" },
       typeCondition: {
         kind: "NamedType",
         name: { kind: "Name", value: "Post" },
@@ -244,10 +243,9 @@ export const AllPostsDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "Field", name: { kind: "Name", value: "id" } },
                 {
                   kind: "FragmentSpread",
-                  name: { kind: "Name", value: "CommentFragment" },
+                  name: { kind: "Name", value: "Comment" },
                 },
               ],
             },

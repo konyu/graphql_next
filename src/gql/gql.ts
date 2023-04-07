@@ -13,11 +13,11 @@ import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  "\n  fragment CommentFragment on Comment {\n    name\n    postId\n  }\n":
-    types.CommentFragmentFragmentDoc,
-  "\n  fragment PostFragment on Post {\n    name\n    comments {\n      id\n      ...CommentFragment\n    }\n  }\n":
-    types.PostFragmentFragmentDoc,
-  "\n  query allPosts {\n    posts {\n      id\n      ...PostFragment\n    }\n  }\n":
+  "\n  fragment Comment on Comment {\n    name\n    postId\n  }\n":
+    types.CommentFragmentDoc,
+  "\n  fragment Post on Post {\n    name\n    comments {\n      ...Comment\n    }\n  }\n":
+    types.PostFragmentDoc,
+  "\n  query allPosts {\n    posts {\n      name\n      ...Post\n    }\n  }\n":
     types.AllPostsDocument,
 };
 
@@ -39,20 +39,20 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "\n  fragment CommentFragment on Comment {\n    name\n    postId\n  }\n"
-): (typeof documents)["\n  fragment CommentFragment on Comment {\n    name\n    postId\n  }\n"];
+  source: "\n  fragment Comment on Comment {\n    name\n    postId\n  }\n"
+): (typeof documents)["\n  fragment Comment on Comment {\n    name\n    postId\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "\n  fragment PostFragment on Post {\n    name\n    comments {\n      id\n      ...CommentFragment\n    }\n  }\n"
-): (typeof documents)["\n  fragment PostFragment on Post {\n    name\n    comments {\n      id\n      ...CommentFragment\n    }\n  }\n"];
+  source: "\n  fragment Post on Post {\n    name\n    comments {\n      ...Comment\n    }\n  }\n"
+): (typeof documents)["\n  fragment Post on Post {\n    name\n    comments {\n      ...Comment\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "\n  query allPosts {\n    posts {\n      id\n      ...PostFragment\n    }\n  }\n"
-): (typeof documents)["\n  query allPosts {\n    posts {\n      id\n      ...PostFragment\n    }\n  }\n"];
+  source: "\n  query allPosts {\n    posts {\n      name\n      ...Post\n    }\n  }\n"
+): (typeof documents)["\n  query allPosts {\n    posts {\n      name\n      ...Post\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

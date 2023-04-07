@@ -10,7 +10,7 @@
     "format": "prettier --write --ignore-path .gitignore --ignore-unknown './**/*'",
     "codegen": "scripts/codegen.sh",
     "codegen-watch": "npx graphql-codegen --watch",
-    "test": "jest --watch"
+    "test": "jest"
   },
   "dependencies": {
     "@next/font": "13.1.6",
