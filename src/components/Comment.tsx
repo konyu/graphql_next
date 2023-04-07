@@ -1,14 +1,14 @@
 import { FC } from "react";
-import { Comment as CommentType } from "@/gql/graphql";
+import { CommentFragment } from "@/gql/graphql";
 import { gql } from "@apollo/client";
 
 gql`
-  fragment CommentFragment on Comment {
+  fragment Comment on Comment {
     name
     postId
   }
 `;
 
-export const Comment: FC<CommentType> = ({ name }) => {
+export const Comment: FC<CommentFragment> = ({ name, postId }) => {
   return <div>{name}</div>;
 };
