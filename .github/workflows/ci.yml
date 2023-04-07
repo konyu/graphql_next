@@ -1,7 +1,5 @@
 name: CI
 on: [pull_request]
-env:
-  REPO_NAME: konyu/graphql_rails
 
 jobs:
   eslint:
