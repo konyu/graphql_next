@@ -2,22 +2,28 @@ name: Trigger
 on: [workflow_dispatch]
 
 jobs:
-  copy-and-regenerate:
-    name: copy schema.graphql and regenarate
+  server-side-change:
+    name: Server side change trigger
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
-      - uses: actions/setup-node@v3
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18
+      #     cache: npm
+      # - run: npm ci
+      # - name: Copy codegen.ts
+      #   run: ./scripts/codegen.sh
+      #   shell: bash
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Build
+      #   run: npm run build
+      - name: Regenarate schema.graphql and Build
+        uses: ./.github/actions/pre_test
         with:
-          node-version: 18
-          cache: npm
-      - run: npm ci
-      - name: Copy codegen.ts
-        run: ./scripts/codegen.sh
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run test
         run: npm run test
