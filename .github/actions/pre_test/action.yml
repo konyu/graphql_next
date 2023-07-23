@@ -1,5 +1,4 @@
-name: "Hello World"
-description: "Greet someone"
+name: "Regenarate schema.graphql and Build"
 inputs:
   github-token:
     required: true
@@ -13,10 +12,18 @@ runs:
     - run: npm ci
       shell: bash
     - name: Copy codegen.ts
-      run: ./scripts/codegen.sh
+      run: ./scripts/dl_schema.sh
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
+    # schema.graphqlファイルの中にある@deprecatedがある行を削除する
+    - name: Remove @deprecated
+      run: sed -i '/@deprecated/d' schema.graphql
+      shell: bash
+      if: env.DEPRECATED_REMOVER
+    - name: Generate code
+      run: npx graphql-codegen
+      shell: bash
     - name: Build
       run: npm run build
       shell: bash
