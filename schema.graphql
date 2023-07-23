@@ -1,7 +1,7 @@
 type Comment {
   createdAt: ISO8601DateTime
   id: ID
-  name: String!
+  name: String! @deprecated(reason: "Use instead")
   postId: Int!
   updatedAt: ISO8601DateTime
 }

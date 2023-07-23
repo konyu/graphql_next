@@ -5,7 +5,6 @@ gh api $SCHEMA_FILE -H "Accept: application/vnd.github.raw" > schema.graphql_new
 # schema.graphqlが存在しない場合
 if [ ! -e schema.graphql ]; then
   mv schema.graphql_new schema.graphql
-  npx graphql-codegen
   exit 0
 fi
 
@@ -14,7 +13,6 @@ diff -sq schema.graphql_new schema.graphql
 if [ $? -eq 1 ]; then
   rm schema.graphql
   mv schema.graphql_new schema.graphql
-  npx graphql-codegen
 else
   rm schema.graphql_new
 fi
